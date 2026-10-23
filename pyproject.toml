@@ -1,0 +1,37 @@
+[project]
+name = "tradify-api-mcp"
+version = "1.0.1"
+description = "Self-hosted Tradify API and MCP server on your own Chrome session. Personal use only."
+readme = "README.md"
+license = "PolyForm-Noncommercial-1.0.0"
+license-files = ["LICENSE"]
+classifiers = ["Programming Language :: Python :: 3", "Topic :: Office/Business"]
+requires-python = ">=3.11"
+authors = [{ name = "Cotlet", email = "contact@cotlet.dev" }]
+keywords = ["tradify", "tradify api", "tradify mcp", "mcp server", "claude", "chatgpt", "cursor"]
+dependencies = [
+    "curl_cffi>=0.13,<0.17",
+    "fastapi>=0.115",
+    "uvicorn>=0.30",
+    "mcp>=1.12,<2",
+    "jsonschema>=4.20",
+    "websockets>=13",
+]
+
+[project.urls]
+Homepage = "https://cotlet.dev/integrations/tradify-api-mcp-server"
+Source = "https://github.com/cotletdev/tradify-api-mcp-server"
+
+[project.scripts]
+tradify-mcp = "tradify_api_mcp.cli:main"
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["tradify_api_mcp"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
