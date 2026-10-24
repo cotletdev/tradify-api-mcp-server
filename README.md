@@ -1,5 +1,7 @@
 # Tradify API and MCP server, self-hosted
 
+<!-- mcp-name: dev.cotlet/tradify -->
+
 A **Tradify API** and a **Tradify MCP server** you run on your own computer, in Python, on the session of your own Google Chrome. All 15 Tradify tools we run in production at [Cotlet](https://cotlet.dev/integrations/tradify-api-mcp-server): jobs and job status, customers, quotes with line items, invoices from quotes, quote and invoice email, payments, and the Scheduler.
 
 Tradify has no public API, no API keys, no webhooks and no official MCP server. Its accounting connectors (Xero, QuickBooks, Sage) sync invoices and bills, not jobs, quotes or the schedule. This repo gives you:
