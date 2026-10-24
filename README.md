@@ -8,13 +8,13 @@ Tradify has no public API, no API keys, no webhooks and no official MCP server. 
 
 - **MCP server** for Claude Code, Claude Desktop, Cursor, Codex and any MCP client, over stdio or HTTP. [Setup](#mcp-server)
 - **REST API** on `http://127.0.0.1:8787/api/v1/tradify`, with OpenAPI docs at `/docs`. [Setup](#rest-api)
-- **Python**: `call("list_invoices", {"status": "overdue"})`, plus 9 ready scripts in [`examples/`](examples/).
+- **Python**: `call("list_invoices", {"status": "overdue"})`, plus 9 ready scripts in [`examples/`](https://github.com/cotletdev/tradify-api-mcp-server/blob/main/examples/).
 
 It is for technical people who want to run it themselves, **for noncommercial use only** ([license](#license)). If you want it running 24/7 on a server, kept working when Tradify changes its web app, for a team or a business, use the [hosted version at cotlet.dev](https://cotlet.dev/integrations/tradify-api-mcp-server).
 
 [![Tradify MCP server](https://img.shields.io/badge/Tradify%20MCP-15%20tools-6d4aef)](#all-15-tools)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-141318)](#requirements)
-[![License: PolyForm Noncommercial 1.0.0](https://img.shields.io/badge/license-PolyForm%20Noncommercial-141318)](LICENSE)
+[![License: PolyForm Noncommercial 1.0.0](https://img.shields.io/badge/license-PolyForm%20Noncommercial-141318)](https://github.com/cotletdev/tradify-api-mcp-server/blob/main/LICENSE)
 [![MCP Badge](https://lobehub.com/badge/mcp/cotletdev-tradify-api-mcp-server)](https://lobehub.com/mcp/cotletdev-tradify-api-mcp-server)
 
 ```bash
@@ -76,7 +76,7 @@ tradify-mcp --version
 
 With [uv](https://docs.astral.sh/uv/): `uv venv && uv pip install -e .`, then `uv run tradify-mcp ...`.
 
-Setting it up with an AI agent (Claude Code, Codex, Cursor)? Open it in this folder and ask it to set up the repo: [`AGENTS.md`](AGENTS.md) tells it every step, and it asks you only for the steps in Chrome.
+Setting it up with an AI agent (Claude Code, Codex, Cursor)? Open it in this folder and ask it to set up the repo: [`AGENTS.md`](https://github.com/cotletdev/tradify-api-mcp-server/blob/main/AGENTS.md) tells it every step, and it asks you only for the steps in Chrome.
 
 To update: `git pull && pip install -e .`. We copy every change of the hosted Tradify tools into this repo.
 
@@ -167,7 +167,7 @@ claude mcp add tradify -- /path/to/tradify-api-mcp-server/.venv/bin/tradify-mcp 
 
 ### Cursor
 
-`~/.cursor/mcp.json`, the same block as Claude Desktop. A ready copy is in [`mcp.json`](mcp.json).
+`~/.cursor/mcp.json`, the same block as Claude Desktop. A ready copy is in [`mcp.json`](https://github.com/cotletdev/tradify-api-mcp-server/blob/main/mcp.json).
 
 ### Codex
 
@@ -250,19 +250,19 @@ Or one tool from the shell: `tradify-mcp call list_quotes status=accepted since=
 
 Times are wall clock in your company's time zone (Settings > Company). `2026-10-29T08:00` means 8:00 there. A time with an offset is converted to it, and answers carry the company's offset.
 
-Ready scripts in [`examples/`](examples/). Each prints a short list or JSON, takes `--out file.csv` or `--out file.json` where it makes sense, and `--help`. The ones that change Tradify only show their plan until you pass `--apply` or `--send`:
+Ready scripts in [`examples/`](https://github.com/cotletdev/tradify-api-mcp-server/blob/main/examples/). Each prints a short list or JSON, takes `--out file.csv` or `--out file.json` where it makes sense, and `--help`. The ones that change Tradify only show their plan until you pass `--apply` or `--send`:
 
 | Script | What it does |
 |---|---|
-| [`overdue_invoices.py`](examples/overdue_invoices.py) | Every overdue invoice, totalled per customer, oldest first, with the ones past your last reminder marked. A call list. |
-| [`record_payments.py`](examples/record_payments.py) | Records the payments of a CSV bank export against invoices by number. Skips an unknown or closed invoice and a payment above the amount due. `--apply`. |
-| [`pay_and_close.py`](examples/pay_and_close.py) | Records a payment on one invoice and sets its jobs to complete once nothing is due. |
-| [`job_from_call.py`](examples/job_from_call.py) | Finds or adds the caller, creates the job, and with `--start` books staff after checking their day for overlaps. |
-| [`quote_from_notes.py`](examples/quote_from_notes.py) | A draft quote from a text file of time and misc lines; `--send` emails it. |
-| [`deposit_invoices.py`](examples/deposit_invoices.py) | A percentage deposit invoice for every quote accepted lately whose job has no invoice yet. `--apply`, `--send`. |
-| [`tomorrows_schedule.py`](examples/tomorrows_schedule.py) | Tomorrow's Scheduler grouped by staff member, with job, customer and crew notes. |
-| [`export_jobs.py`](examples/export_jobs.py) | Jobs to CSV or JSON. `--status`, `--search`. |
-| [`export_customers.py`](examples/export_customers.py) | Every customer to CSV or JSON, with sites. `--archived`. |
+| [`overdue_invoices.py`](https://github.com/cotletdev/tradify-api-mcp-server/blob/main/examples/overdue_invoices.py) | Every overdue invoice, totalled per customer, oldest first, with the ones past your last reminder marked. A call list. |
+| [`record_payments.py`](https://github.com/cotletdev/tradify-api-mcp-server/blob/main/examples/record_payments.py) | Records the payments of a CSV bank export against invoices by number. Skips an unknown or closed invoice and a payment above the amount due. `--apply`. |
+| [`pay_and_close.py`](https://github.com/cotletdev/tradify-api-mcp-server/blob/main/examples/pay_and_close.py) | Records a payment on one invoice and sets its jobs to complete once nothing is due. |
+| [`job_from_call.py`](https://github.com/cotletdev/tradify-api-mcp-server/blob/main/examples/job_from_call.py) | Finds or adds the caller, creates the job, and with `--start` books staff after checking their day for overlaps. |
+| [`quote_from_notes.py`](https://github.com/cotletdev/tradify-api-mcp-server/blob/main/examples/quote_from_notes.py) | A draft quote from a text file of time and misc lines; `--send` emails it. |
+| [`deposit_invoices.py`](https://github.com/cotletdev/tradify-api-mcp-server/blob/main/examples/deposit_invoices.py) | A percentage deposit invoice for every quote accepted lately whose job has no invoice yet. `--apply`, `--send`. |
+| [`tomorrows_schedule.py`](https://github.com/cotletdev/tradify-api-mcp-server/blob/main/examples/tomorrows_schedule.py) | Tomorrow's Scheduler grouped by staff member, with job, customer and crew notes. |
+| [`export_jobs.py`](https://github.com/cotletdev/tradify-api-mcp-server/blob/main/examples/export_jobs.py) | Jobs to CSV or JSON. `--status`, `--search`. |
+| [`export_customers.py`](https://github.com/cotletdev/tradify-api-mcp-server/blob/main/examples/export_customers.py) | Every customer to CSV or JSON, with sites. `--archived`. |
 
 ```bash
 python examples/overdue_invoices.py
@@ -415,7 +415,7 @@ No. The source is public, but the license allows noncommercial use only: no busi
 
 ## License
 
-[PolyForm Noncommercial License 1.0.0](LICENSE). In short:
+[PolyForm Noncommercial License 1.0.0](https://github.com/cotletdev/tradify-api-mcp-server/blob/main/LICENSE). In short:
 
 - **Allowed:** noncommercial use: you, for your own personal purposes with your own Tradify account, or a charity, school, public research or government body. Changing the code, and sharing it under the same license.
 - **Not allowed:** any commercial use, your own business included; client work; selling or offering it, or a service built on it.
@@ -426,7 +426,7 @@ No. The source is public, but the license allows noncommercial use only: no busi
   <a href="https://cotlet.dev">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="assets/logo-white.svg">
-      <img src="assets/logo.svg" alt="Cotlet" width="120">
+      <img src="https://raw.githubusercontent.com/cotletdev/tradify-api-mcp-server/main/assets/logo.svg" alt="Cotlet" width="120">
     </picture>
   </a>
 </p>
