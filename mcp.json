@@ -1,8 +1,11 @@
 {
   "mcpServers": {
     "tradify": {
-      "command": "/path/to/tradify-api-mcp-server/.venv/bin/tradify-mcp",
-      "args": ["mcp"]
+      "command": "uvx",
+      "args": [
+        "tradify-api-mcp",
+        "mcp"
+      ]
     }
   }
 }

@@ -18,11 +18,10 @@ It is for technical people who want to run it themselves, **for noncommercial us
 [![MCP Badge](https://lobehub.com/badge/mcp/cotletdev-tradify-api-mcp-server)](https://lobehub.com/mcp/cotletdev-tradify-api-mcp-server)
 
 ```bash
-git clone https://github.com/cotletdev/tradify-api-mcp-server.git && cd tradify-api-mcp-server
-python3 -m venv .venv && . .venv/bin/activate && pip install -e .
+uv tool install tradify-api-mcp                  # or: pip install tradify-api-mcp
 tradify-mcp connect                                # reads your Tradify session from Chrome
 tradify-mcp call list_jobs
-claude mcp add tradify -- "$PWD/.venv/bin/tradify-mcp" mcp
+claude mcp add tradify -- uvx tradify-api-mcp mcp
 ```
 
 ## Contents
@@ -65,6 +64,17 @@ The session lives in one cookie, `SessionId`. With **Keep me logged in** Tradify
 
 ## Install
 
+From [PyPI](https://pypi.org/project/tradify-api-mcp/):
+
+```bash
+uv tool install tradify-api-mcp       # or: pipx install tradify-api-mcp, or: pip install tradify-api-mcp
+tradify-mcp --version
+```
+
+MCP clients can also run it with no install: `uvx tradify-api-mcp mcp`.
+
+From source:
+
 ```bash
 git clone https://github.com/cotletdev/tradify-api-mcp-server.git
 cd tradify-api-mcp-server
@@ -78,7 +88,7 @@ With [uv](https://docs.astral.sh/uv/): `uv venv && uv pip install -e .`, then `u
 
 Setting it up with an AI agent (Claude Code, Codex, Cursor)? Open it in this folder and ask it to set up the repo: [`AGENTS.md`](https://github.com/cotletdev/tradify-api-mcp-server/blob/main/AGENTS.md) tells it every step, and it asks you only for the steps in Chrome.
 
-To update: `git pull && pip install -e .`. We copy every change of the hosted Tradify tools into this repo.
+To update: `uv tool upgrade tradify-api-mcp` (or `pip install -U tradify-api-mcp`), from source `git pull && pip install -e .`. We copy every change of the hosted Tradify tools into this repo.
 
 ## Connect your Chrome
 
@@ -145,9 +155,9 @@ The MCP server lists every tool with its input schema, a description written for
 ### Claude Code
 
 ```bash
-claude mcp add tradify -- /path/to/tradify-api-mcp-server/.venv/bin/tradify-mcp mcp
+claude mcp add tradify -- uvx tradify-api-mcp mcp
 # read only:
-claude mcp add tradify -- /path/to/tradify-api-mcp-server/.venv/bin/tradify-mcp mcp --read-only
+claude mcp add tradify -- uvx tradify-api-mcp mcp --read-only
 ```
 
 ### Claude Desktop
@@ -158,8 +168,8 @@ claude mcp add tradify -- /path/to/tradify-api-mcp-server/.venv/bin/tradify-mcp 
 {
   "mcpServers": {
     "tradify": {
-      "command": "/path/to/tradify-api-mcp-server/.venv/bin/tradify-mcp",
-      "args": ["mcp"]
+      "command": "uvx",
+      "args": ["tradify-api-mcp", "mcp"]
     }
   }
 }
@@ -175,8 +185,8 @@ claude mcp add tradify -- /path/to/tradify-api-mcp-server/.venv/bin/tradify-mcp 
 
 ```toml
 [mcp_servers.tradify]
-command = "/path/to/tradify-api-mcp-server/.venv/bin/tradify-mcp"
-args = ["mcp"]
+command = "uvx"
+args = ["tradify-api-mcp", "mcp"]
 ```
 
 ### Over HTTP
