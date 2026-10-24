@@ -67,7 +67,7 @@ Errors come as `<code>: <message>`. `auth_expired` means Tradify signed the sess
 | `tradify_api_mcp/app.py` | app name, domains, session cookie, account paths, REST prefix | Rarely |
 | `tradify_api_mcp/core/` | `@tool` declaration, errors, the HTTP client with the session (`context.py`), the guard against account changes (`account_guard.py`) | Yes |
 | `tradify_api_mcp/session.py` | reading cookies from Chrome over CDP, the session file | Yes |
-| `tradify_api_mcp/runner.py`, `api.py`, `mcp_server.py`, `cli.py` | tool registry, REST API, MCP server, command line | Yes |
+| `tradify_api_mcp/runner.py`, `api.py`, `mcp_server.py`, `mcp_context.py`, `cli.py` | tool registry, REST API, MCP server, its prompts and resources, command line | Yes |
 | `examples/` | scripts for common jobs | Yes |
 
 A new tool is a new file in `tradify_api_mcp/tradify/tools/` with a `@tool(...)` declaration (name, access, input schema, `route`). The registry finds it, and the REST API, the MCP server and the CLI show it without other changes. Every request goes through `_api.Api`: GET for reads, POST with the antiforgery token of the app's start-up answer, and `save` for Breeze `SaveChanges`, which every write uses.
