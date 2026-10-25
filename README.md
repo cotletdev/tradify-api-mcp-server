@@ -2,7 +2,7 @@
 
 <!-- mcp-name: dev.cotlet/tradify -->
 
-A **Tradify API** and a **Tradify MCP server** you run on your own computer, in Python, on the session of your own Google Chrome. All 15 Tradify tools we run in production at [Cotlet](https://cotlet.dev/integrations/tradify-api-mcp-server): jobs and job status, customers, quotes with line items, invoices from quotes, quote and invoice email, payments, and the Scheduler.
+A **Tradify API** and a **Tradify MCP server** you run on your own computer, in Python, on the session of your own Google Chrome. All 22 Tradify tools we run in production at [Cotlet](https://cotlet.dev/integrations/tradify-api-mcp-server): jobs, job status and notes, customers, quotes with line items, invoices from quotes, quote and invoice email, payments, the Scheduler, reports and timesheets.
 
 Tradify has no public API, no API keys, no webhooks and no official MCP server. Its accounting connectors (Xero, QuickBooks, Sage) sync invoices and bills, not jobs, quotes or the schedule. This repo gives you:
 
@@ -33,7 +33,7 @@ claude mcp add tradify -- uvx tradify-api-mcp mcp
 - [MCP server](#mcp-server)
 - [REST API](#rest-api)
 - [Python and the example scripts](#python-and-the-example-scripts)
-- [All 15 tools](#all-15-tools)
+- [All 22 tools](#all-22-tools)
 - [Configuration](#configuration)
 - [Security and your Tradify account](#security-and-your-tradify-account)
 - [Errors](#errors)
@@ -282,7 +282,7 @@ python examples/export_jobs.py --status to_invoice --out to_invoice.csv
 
 On a schedule, cron on your own computer works while it is on: `0 18 * * * cd ~/tradify-api-mcp-server && .venv/bin/python examples/tomorrows_schedule.py`.
 
-## All 15 tools
+## All 22 tools
 
 IDs come from the list tools: `job_id` from `list_jobs`, `customer_id` from `list_customers`, `quote_id` from `list_quotes`, `invoice_id` from `list_invoices`. Staff are named by full name, as on the Scheduler. `tradify-mcp tools` prints this list, `tradify-mcp tools --json` adds the input schemas.
 
@@ -294,12 +294,14 @@ IDs come from the list tools: `job_id` from `list_jobs`, `customer_id` from `lis
 | `get_job` | read | `GET /jobs/{job_id}` | Full job: description, site, tasks, notes, appointments, costs, linked quotes and invoices. |
 | `create_job` | write | `POST /customers/{customer_id}/jobs` | New job for a customer. It starts as Unassigned. |
 | `update_job_status` | write | `PATCH /jobs/{job_id}/status` | Set a status on a job, built-in or one of your custom statuses. |
+| `add_job_note` | write | `POST /jobs/{job_id}/notes` | Add a text note to a job's Notes tab. It notifies no one. |
 
 ### Customers
 
 | Tool | Access | REST route | What it does |
 |---|---|---|---|
 | `list_customers` | read | `GET /customers` | Customer profiles with contact details and sites. |
+| `get_customer` | read | `GET /customers/{customer_id}` | Customer profile with sites, notes, latest jobs, quotes and invoices, and the balance due. |
 | `create_customer` | write | `POST /customers` | New customer profile, optionally with contact details and a physical address. |
 
 ### Quotes
@@ -307,6 +309,7 @@ IDs come from the list tools: `job_id` from `list_jobs`, `customer_id` from `lis
 | Tool | Access | REST route | What it does |
 |---|---|---|---|
 | `list_quotes` | read | `GET /quotes` | Quotes with customer, total, quote date, expiry date and status. |
+| `get_quote` | read | `GET /quotes/{quote_id}` | Full quote: lines with price and cost, tax, totals, gross profit, dates and invoices made from it. |
 | `create_quote` | write | `POST /customers/{customer_id}/quotes` | Draft quote with line items. Nothing is sent until you call send_quote. |
 | `send_quote` | write | `POST /quotes/{quote_id}/send` | Approve the quote and email it to the customer with a link to accept or decline online. |
 
@@ -315,6 +318,7 @@ IDs come from the list tools: `job_id` from `list_jobs`, `customer_id` from `lis
 | Tool | Access | REST route | What it does |
 |---|---|---|---|
 | `list_invoices` | read | `GET /invoices` | Invoices with customer, job, due date, total, amount paid and amount due. |
+| `get_invoice` | read | `GET /invoices/{invoice_id}` | Full invoice: lines, tax, totals, every payment with date and method, amount due, jobs and quote. |
 | `create_invoice_from_quote` | write | `POST /quotes/{quote_id}/invoices` | Draft invoice from an approved or accepted quote, for all of it or part of it. |
 | `send_invoice` | write | `POST /invoices/{invoice_id}/send` | Approve the invoice and email it to the customer, with payment reminders if enabled. |
 | `record_payment` | write | `POST /invoices/{invoice_id}/payments` | Record a payment received against an invoice and reduce the amount due. |
@@ -326,9 +330,17 @@ IDs come from the list tools: `job_id` from `list_jobs`, `customer_id` from `lis
 | `list_appointments` | read | `GET /appointments` | Scheduler appointments in a date range, with staff, job, times and notes. |
 | `schedule_appointment` | write | `POST /jobs/{job_id}/appointments` | Book a job appointment on the Scheduler for staff, optionally emailing the customer a confirmation. |
 
+### Reports and timesheets
+
+| Tool | Access | REST route | What it does |
+|---|---|---|---|
+| `get_report` | read | `GET /reports/{report}` | Job profitability, job sheet, staff productivity or timesheet report for a period, as rows. |
+| `list_timesheets` | read | `GET /timesheets` | Timesheet entries in a date range: staff, job, customer, billing rate, hours, notes, invoiced. |
+| `log_time` | write | `POST /timesheets` | Add a timesheet entry for a staff member, optionally on a job, with billing rate and notes. |
+
 `send_quote` and `send_invoice` email the customer. `schedule_appointment` sends each staff member Tradify's "You've been scheduled" notice, and emails the customer only with `email_customer`. The other write tools stay inside Tradify. Drafts from `create_quote` and `create_invoice_from_quote` reach nobody. `record_payment` refuses more than the amount due and a draft invoice. Part invoices from a quote (`percentage`, `fixed_amount`, `line_items`) need a plan with progress invoicing, which Tradify sells as Pro.
 
-Not in this version: price list items, kits and quote options (quotes take misc and time lines), reading a quote's lines, editing or deleting a quote, invoice or customer, moving or cancelling an appointment, a staff list, timesheets, costing, bills, purchase orders, enquiries, recurring jobs and forms.
+Not in this version: price list items, kits and quote options (quotes take misc and time lines), editing or deleting a quote, invoice or customer, editing or deleting a time entry, moving or cancelling an appointment, report PDFs, job tasks and attachments, bills, purchase orders, enquiries, recurring jobs and forms.
 
 Never built, on purpose: your Tradify sign-in, password and 2-Step Security, and your Tradify plan and billing. Every request passes a guard that refuses any change to the sign-in and account paths of the web app.
 

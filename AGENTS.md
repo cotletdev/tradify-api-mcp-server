@@ -1,6 +1,6 @@
 # AGENTS.md
 
-You are an AI agent in a clone of this repo. It is a self-hosted Tradify API and MCP server: 15 tools that work in the user's own Tradify account (go.tradifyhq.com), through the session of their own Google Chrome. Your usual job is one of three: set it up for the user, use its tools for them, or change its code. Human docs: `README.md`.
+You are an AI agent in a clone of this repo. It is a self-hosted Tradify API and MCP server: 22 tools that work in the user's own Tradify account (go.tradifyhq.com), through the session of their own Google Chrome. Your usual job is one of three: set it up for the user, use its tools for them, or change its code. Human docs: `README.md`.
 
 ## Before you start
 
@@ -43,7 +43,7 @@ If step 4 fails:
 ## Use the tools
 
 - With the MCP server added, call its tools. Without it: `.venv/bin/tradify-mcp call <tool> key=value ...`, or one JSON object as the argument.
-- `.venv/bin/tradify-mcp tools` lists all 15 tools with access and route. `tools --json` adds the input schemas.
+- `.venv/bin/tradify-mcp tools` lists all 22 tools with access and route. `tools --json` adds the input schemas.
 - Start with `list_jobs` and `list_customers`. Their `job_id` and `customer_id` are what `get_job`, `create_job`, `create_quote` and `schedule_appointment` take. `list_quotes` gives `quote_id`, `list_invoices` gives `invoice_id`. Staff are named by full name.
 - Search `list_customers` before `create_customer`: it matches name, contact, email and phone. Two close matches mean you ask the user which one.
 - Times are wall clock in the company's time zone (`2026-10-29T08:00`). Dates are `YYYY-MM-DD`. Read `list_appointments` for the day before `schedule_appointment`: Tradify books over other appointments.

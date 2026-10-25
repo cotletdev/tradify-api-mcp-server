@@ -8,9 +8,12 @@ from tradify_api_mcp.core.tools import tool
 from tradify_api_mcp.tradify.tools._api import APPOINTMENT_STATUSES, QUOTE_STATUSES, Api, deref, iso_date, money, slug
 from tradify_api_mcp.tradify.tools._invoices import invoice_status
 from tradify_api_mcp.tradify.tools._jobs import child, job_detail
+from tradify_api_mcp.tradify.tools._timesheets import entry_row
 
 if TYPE_CHECKING:
     from tradify_api_mcp.core.context import ToolContext
+
+TIME_FIELDS = ("timesheet_id", "date", "staff", "billing_rate", "hours", "notes", "invoiced")
 
 INPUT_SCHEMA: dict[str, Any] = {
     "type": "object",
@@ -44,6 +47,17 @@ EXAMPLE_RESPONSE: dict[str, Any] = {
         }
     ],
     "costs": [],
+    "time": [
+        {
+            "timesheet_id": "17e94a82-c684-4781-ba18-c5ab3eeb6a12",
+            "date": "2026-10-23",
+            "staff": "Sam Carter",
+            "billing_rate": "Standard Labour Rate",
+            "hours": 2.5,
+            "notes": "Removed old grease trap",
+            "invoiced": False,
+        }
+    ],
     "quotes": [
         {"quote_id": "89d70250-7c33-43f9-8311-966f32cd9559", "number": "QT00001", "status": "accepted", "total": 1219.0}
     ],
@@ -67,7 +81,8 @@ EXAMPLE_RESPONSE: dict[str, Any] = {
     details=(
         "Returns one job: customer, contact, site address, status, reference and description, the staff on it, "
         "its tasks and notes, the Scheduler appointments (times with the company's UTC offset), the costs logged "
-        "on it (products and misc costs) and the quotes and invoices linked to it. Read it before changing a job."
+        "on it (products and misc costs), the time logged on it (timesheets) and the quotes and invoices linked to "
+        "it. Read it before changing a job."
     ),
     input_schema=INPUT_SCHEMA,
     route="GET /jobs/{job_id}",
@@ -99,6 +114,13 @@ async def get_job(ctx: ToolContext, args: dict[str, Any]) -> Any:
         )
     tasks = [deref(t, found) for t in children.get("JobTasks") or []]
     notes = child(body, found, "JobNotes")[0]
+    entries = sorted(
+        (deref(t, found) for t in children.get("TimesheetEntries") or []), key=lambda t: str(t.get("StartTime") or "")
+    )
+    time = []
+    for entry in entries:
+        row = await entry_row(api, entry, found)
+        time.append({k: row[k] for k in TIME_FIELDS})
     costs = [deref(c, found) for c in [*(children.get("JobProducts") or []), *(children.get("JobMiscCosts") or [])]]
     return {
         "job_id": job.get("Id"),
@@ -127,6 +149,7 @@ async def get_job(ctx: ToolContext, args: dict[str, Any]) -> Any:
             {"description": c.get("Description"), "quantity": c.get("Quantity"), "amount": money(c.get("Amount"))}
             for c in costs
         ],
+        "time": time,
         "quotes": [
             {
                 "quote_id": q.get("Id"),

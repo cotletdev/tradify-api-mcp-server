@@ -53,7 +53,7 @@ async def app_state(ctx: ToolContext) -> dict[str, Any]:
     response = await ctx.call("GET", url, headers={"referer": f"{WEB}/"})
     body: dict[str, Any] = response.json()
     if not (body.get("SessionInfo") or {}).get("IsAuthenticated"):
-        raise AuthExpiredError("The app signed this account out. Sign in again in Chrome, then run connect.")
+        raise AuthExpiredError("The app signed this account out. Sign in again in its Cloud Browser.")
     return body
 
 
