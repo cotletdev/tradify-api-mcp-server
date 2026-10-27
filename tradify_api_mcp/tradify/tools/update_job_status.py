@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING, Any
 from tradify_api_mcp.core.errors import ErrorCode, ToolError
 from tradify_api_mcp.core.tools import tool
 from tradify_api_mcp.tradify.tools._api import Api, slug
-from tradify_api_mcp.tradify.tools._jobs import job_statuses, status_ids
+from tradify_api_mcp.tradify.tools._jobs import job_detail, job_statuses, status_ids
 
 if TYPE_CHECKING:
     from tradify_api_mcp.core.context import ToolContext
@@ -57,8 +57,11 @@ async def update_job_status(ctx: ToolContext, args: dict[str, Any]) -> Any:
     answer = await api.post("Job/BulkUpdateJobStatus", {"jobIds": [job_id], "jobStatusId": status_id})
     answer = answer if isinstance(answer, dict) else {}
     if answer.get("FailedJobIds") or not answer.get("UpdatedCount"):
-        raise ToolError(
-            "Tradify did not change this job's status; check the job_id (list_jobs).", ErrorCode.TARGET_ERROR
-        )
+        # Tradify counts no update when the job already has this status: that is success.
+        job, _, _ = await job_detail(api, job_id)
+        if answer.get("FailedJobIds") or int(job.get("JobStatusId") or 0) != status_id:
+            raise ToolError(
+                "Tradify did not change this job's status; check the job_id (list_jobs).", ErrorCode.TARGET_ERROR
+            )
     name = next(s.get("Description") for s in statuses if int(s["Id"]) == status_id)
     return {"job_id": job_id, "status": slug(name)}
