@@ -89,7 +89,7 @@ Yes, with the hosted version: once Tradify is connected, the ChatGPT and Claude 
 For the hosted version, no: you sign in to Tradify and add Cotlet to ChatGPT or Claude, with step-by-step instructions in your account. This repo is for people who are fine with Python and a terminal.
 
 **Is my Tradify account safe?**
-You sign in to Tradify yourself, and the AI works on that signed-in session. Neither version stores your Tradify password. Anything that reaches a customer, like a sent quote or invoice, asks for your OK first: in the hosted version by default, here through your MCP client.
+Yes. Neither version sees or stores your Tradify password. You sign in yourself, the way you always do, and the AI works on that signed-in session. Anything that reaches a customer, like a sent quote or invoice, asks for your OK first: in the hosted version by default, here through your MCP client.
 
 **Can it connect Tradify to WhatsApp, Gmail or my calendar?**
 Through n8n, Make or Zapier, yes: they pass a message or an email to the Tradify tools, for example to create a job from a WhatsApp enquiry. The hosted version connects to all three. ChatGPT and Claude can also use Tradify and your other connected apps in the same chat.
