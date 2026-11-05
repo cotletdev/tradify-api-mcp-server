@@ -2,7 +2,7 @@
 
 <!-- mcp-name: dev.cotlet/tradify -->
 
-**Yes, ChatGPT and Claude can work in your Tradify account.** Ask in plain words, and the AI creates the job, writes the quote, turns it into an invoice, records the payment and books your staff. It shows you the draft first and sends nothing to a customer until you say so.
+**Yes, ChatGPT, Claude and other AI agents can work in your Tradify account.** That includes Cursor, Codex, OpenClaw and any MCP client, plus automations in n8n, Make and Zapier. Ask in plain words, and the AI creates the job, writes the quote, turns it into an invoice, records the payment and books your staff. It shows you the draft first and sends nothing to a customer until you say so.
 
 Tradify has no public API, no API keys and no official MCP server. This repo is the missing piece: 22 Tradify tools for AI assistants and scripts.
 
@@ -26,7 +26,7 @@ Tradify has no public API, no API keys and no official MCP server. This repo is 
 |---|---|---|
 | For | trades business owners, office staff, teams | developers |
 | Setup | sign in to Tradify once, about 5 minutes, nothing to install | Python, Chrome with remote debugging, a terminal |
-| Works in | ChatGPT and Claude apps, on your phone too, plus n8n, Make, Zapier | Claude Code, Claude Desktop, Cursor, Codex on your computer |
+| Works in | ChatGPT and Claude apps, on your phone too, Cursor, Codex, OpenClaw, any MCP client, n8n, Make, Zapier, REST API | Claude Code, Claude Desktop, Cursor, Codex on your computer |
 | Runs | 24/7, your computer can be off | while your computer and Chrome are on |
 | Price | 7 days free, no card | free |
 
@@ -79,8 +79,8 @@ claude mcp add tradify -- uvx tradify-api-mcp mcp
 **How do I connect Tradify to ChatGPT?**
 Sign up at [cotlet.dev](https://cotlet.dev/signup?app=tradify&utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=faq-chatgpt), sign in to Tradify once in your Cloud Browser there, and add Cotlet to ChatGPT, following the steps in your account. Then ask ChatGPT about your jobs, quotes and invoices like you would ask your office manager. ChatGPT needs a server on the internet, so this repo alone, running on your computer, does not connect to ChatGPT.
 
-**Can Claude create quotes and invoices in Tradify for me?**
-Yes. It writes a draft quote with labour and materials lines, shows it to you, and sends it only after your OK. An accepted quote becomes an invoice, in full or as a deposit. It works in the Claude app through Cotlet, or in Claude Code and Claude Desktop with this repo.
+**Can Claude, ChatGPT or another AI agent create quotes and invoices in Tradify for me?**
+Yes. It writes a draft quote with labour and materials lines, shows it to you, and sends it only after your OK. An accepted quote becomes an invoice, in full or as a deposit. It works in the ChatGPT and Claude apps and any AI agent that takes an MCP server through Cotlet, or in Claude Code, Claude Desktop, Cursor and Codex with this repo.
 
 **Can I use it from my phone, on site?**
 Yes, with the hosted version: once Tradify is connected, the ChatGPT and Claude apps on your phone can use it. Ask for tomorrow's schedule, a new job for a caller or the balance of a customer, without opening Tradify.
