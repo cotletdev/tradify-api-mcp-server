@@ -77,7 +77,7 @@ claude mcp add tradify -- uvx tradify-api-mcp mcp
 ## Questions from Tradify users
 
 **How do I connect Tradify to ChatGPT?**
-Sign up at [cotlet.dev](https://cotlet.dev/signup?app=tradify&utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=faq-chatgpt), sign in to Tradify once in your Cloud Browser there, and add Cotlet to ChatGPT as a connector. Then ask ChatGPT about your jobs, quotes and invoices like you would ask your office manager. ChatGPT needs a server on the internet, so this repo alone, running on your computer, does not connect to ChatGPT.
+Sign up at [cotlet.dev](https://cotlet.dev/signup?app=tradify&utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=faq-chatgpt), sign in to Tradify once in your Cloud Browser there, and add Cotlet to ChatGPT, following the steps in your account. Then ask ChatGPT about your jobs, quotes and invoices like you would ask your office manager. ChatGPT needs a server on the internet, so this repo alone, running on your computer, does not connect to ChatGPT.
 
 **Can Claude create quotes and invoices in Tradify for me?**
 Yes. It writes a draft quote with labour and materials lines, shows it to you, and sends it only after your OK. An accepted quote becomes an invoice, in full or as a deposit. It works in the Claude app through Cotlet, or in Claude Code and Claude Desktop with this repo.
@@ -86,10 +86,10 @@ Yes. It writes a draft quote with labour and materials lines, shows it to you, a
 Yes, with the hosted version: once Tradify is connected, the ChatGPT and Claude apps on your phone can use it. Ask for tomorrow's schedule, a new job for a caller or the balance of a customer, without opening Tradify.
 
 **Do I need to be technical?**
-For the hosted version, no: you sign in to Tradify and copy one link into ChatGPT or Claude. This repo is for people who are fine with Python and a terminal.
+For the hosted version, no: you sign in to Tradify and add Cotlet to ChatGPT or Claude, with step-by-step instructions in your account. This repo is for people who are fine with Python and a terminal.
 
 **Is my Tradify account safe?**
-Neither version sees your Tradify password. You sign in yourself, and the AI works on that session. Anything that reaches a customer, like a sent quote or invoice, waits for your approval first.
+You sign in to Tradify yourself, and the AI works on that signed-in session. Neither version stores your Tradify password. Anything that reaches a customer, like a sent quote or invoice, asks for your OK first: in the hosted version by default, here through your MCP client.
 
 **Can it connect Tradify to WhatsApp, Gmail or my calendar?**
 Through n8n, Make or Zapier, yes: they pass a message or an email to the Tradify tools, for example to create a job from a WhatsApp enquiry. The hosted version connects to all three. ChatGPT and Claude can also use Tradify and your other connected apps in the same chat.
