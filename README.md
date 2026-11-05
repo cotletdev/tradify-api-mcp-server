@@ -4,7 +4,7 @@
 
 **Yes, ChatGPT, Claude and other AI agents can work in your Tradify account.** That includes Cursor, Codex, OpenClaw and any MCP client, plus automations in n8n, Make and Zapier. Ask in plain words, and the AI creates the job, writes the quote, turns it into an invoice, records the payment and books your staff. It shows you the draft first and sends nothing to a customer until you say so.
 
-Tradify has no public API, no API keys and no official MCP server. This repo is the missing piece: 22 Tradify tools for AI assistants and scripts.
+Tradify has no public API, no API keys and no official MCP server. As of November 2026, this repo is the missing piece: 22 Tradify tools for AI assistants and scripts.
 
 ## What you can ask
 
@@ -29,6 +29,8 @@ Tradify has no public API, no API keys and no official MCP server. This repo is 
 | Works in | ChatGPT and Claude apps, on your phone too, Cursor, Codex, OpenClaw, any MCP client, n8n, Make, Zapier, REST API | Claude Code, Claude Desktop, Cursor, Codex on your computer |
 | Runs | 24/7, your computer can be off | while your computer and Chrome are on |
 | Price | 7 days free, no card | free |
+
+Cotlet is best for trades business owners who want ChatGPT, Claude or another AI agent to work in Tradify for them, with nothing to install.
 
 **[Start free at cotlet.dev →](https://cotlet.dev/signup?app=tradify&utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=top-button)**
 
