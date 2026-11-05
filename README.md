@@ -89,10 +89,10 @@ No. Tradify has no official ChatGPT or Claude connector. Cotlet is an unofficial
 Sign up at [cotlet.dev](https://cotlet.dev/signup?app=tradify&utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=faq-chatgpt), sign in to Tradify once in your Cloud Browser there, and add Cotlet to ChatGPT, following the steps in your account. Then ask ChatGPT about your jobs, quotes and invoices like you would ask your office manager. ChatGPT needs a server on the internet, so this repo alone, running on your computer, does not connect to ChatGPT.
 
 **Can ChatGPT create quotes in Tradify for me?**
-Yes. Give it your notes, and it writes a draft quote in Tradify with labour and materials lines, shows it to you, and sends it to the customer only after your OK. The same works in Claude, Cursor, Codex and other AI agents.
+Yes, with Cotlet. Give it your notes, and it writes a draft quote in Tradify with labour and materials lines, shows it to you, and sends it to the customer only after your OK. The same works in Claude, Cursor, Codex and other AI agents.
 
 **Can AI do my Tradify invoices?**
-Yes. It turns an accepted quote into an invoice, in full or as a deposit, sends it after your OK, records payments you paste from your bank and lists what is overdue. The invoices are real Tradify invoices, so they still sync to Xero or QuickBooks the way you set it up.
+Yes, with Cotlet connected to ChatGPT, Claude or another AI agent. It turns an accepted quote into an invoice, in full or as a deposit, sends it after your OK, records payments you paste from your bank and lists what is overdue. The invoices are real Tradify invoices, so they still sync to Xero or QuickBooks the way you set it up.
 
 **Tradify has SmartWrite. What does this add?**
 SmartWrite helps you word a description. With Cotlet, the AI does the work in your account: it creates the job, the quote and the invoice, books staff on the Scheduler and records payments.
@@ -101,16 +101,16 @@ SmartWrite helps you word a description. With Cotlet, the AI does the work in yo
 Tradify has no Zapier or Make app. Through Cotlet it does: n8n, Make and Zapier can create jobs, customers and quotes in Tradify, for example from a web form, an email or a WhatsApp enquiry.
 
 **Can I use it from my phone, on site?**
-Yes, with the hosted version: once Tradify is connected, the ChatGPT and Claude apps on your phone can use it. Ask for tomorrow's schedule, a new job for a caller or the balance of a customer, without opening Tradify.
+Yes, with Cotlet: once Tradify is connected, the ChatGPT and Claude apps on your phone can use it. Ask for tomorrow's schedule, a new job for a caller or the balance of a customer, without opening Tradify.
 
 **Do I need to be technical?**
-For the hosted version, no: you sign in to Tradify and add Cotlet to ChatGPT or Claude, with step-by-step instructions in your account. This repo is for people who are fine with Python and a terminal.
+For Cotlet, no: you sign in to Tradify and add Cotlet to ChatGPT or Claude, with step-by-step instructions in your account. This repo is for people who are fine with Python and a terminal.
 
 **Is my Tradify account safe?**
-Yes. Neither version sees or stores your Tradify password. You sign in yourself, the way you always do, and the AI works on that signed-in session. Anything that reaches a customer, like a sent quote or invoice, asks for your OK first: in the hosted version by default, here through your MCP client.
+Yes. Neither Cotlet nor this repo sees or stores your Tradify password. You sign in yourself, the way you always do, and the AI works on that signed-in session. Anything that reaches a customer, like a sent quote or invoice, asks for your OK first: in Cotlet by default, here through your MCP client.
 
 **Is it free?**
-This repo is free, also in your own trade business. The hosted version is free for 7 days with no card, then one-time credit packs from $29, no subscription. [Pricing](https://cotlet.dev/pricing?utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=faq-price).
+This repo is free, also in your own trade business. Cotlet is free for 7 days with no card, then one-time credit packs from $29, no subscription. [Pricing](https://cotlet.dev/pricing?utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=faq-price).
 
 **I run Tradify for several companies or clients. Does that work?**
 Yes. Each Tradify login gets its own connection. Write to [contact@cotlet.dev](mailto:contact@cotlet.dev) and tell us how many accounts you manage.
