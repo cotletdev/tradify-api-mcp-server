@@ -76,11 +76,29 @@ claude mcp add tradify -- uvx tradify-api-mcp mcp
 
 ## Questions from Tradify users
 
+**Does Tradify have an API?**
+Not a public one. Tradify offers no public API, no self-service API keys and no webhooks, only its built-in integrations (Xero, QuickBooks, MYOB, Sage, Stripe, Google Calendar). This repo and [Cotlet](https://cotlet.dev/integrations/tradify-api-mcp-server?utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=faq-api) give you the missing Tradify API: 22 tools for jobs, customers, quotes, invoices, payments, the Scheduler, reports and timesheets, as a REST API and an MCP server.
+
+**Can I get a Tradify API key?**
+Not from Tradify. With Cotlet you get your own API key that works with your Tradify account, for scripts, n8n, Make, Zapier or any HTTP client. This repo needs no key: it runs on your computer, on your own Tradify session.
+
+**Is there an official ChatGPT integration for Tradify?**
+No. Tradify has no official ChatGPT or Claude connector. Cotlet is an unofficial one that works today, in the ChatGPT and Claude apps and in any AI agent that takes an MCP server.
+
 **How do I connect Tradify to ChatGPT?**
 Sign up at [cotlet.dev](https://cotlet.dev/signup?app=tradify&utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=faq-chatgpt), sign in to Tradify once in your Cloud Browser there, and add Cotlet to ChatGPT, following the steps in your account. Then ask ChatGPT about your jobs, quotes and invoices like you would ask your office manager. ChatGPT needs a server on the internet, so this repo alone, running on your computer, does not connect to ChatGPT.
 
-**Can Claude, ChatGPT or another AI agent create quotes and invoices in Tradify for me?**
-Yes. It writes a draft quote with labour and materials lines, shows it to you, and sends it only after your OK. An accepted quote becomes an invoice, in full or as a deposit. It works in the ChatGPT and Claude apps and any AI agent that takes an MCP server through Cotlet, or in Claude Code, Claude Desktop, Cursor and Codex with this repo.
+**Can ChatGPT create quotes in Tradify for me?**
+Yes. Give it your notes, and it writes a draft quote in Tradify with labour and materials lines, shows it to you, and sends it to the customer only after your OK. The same works in Claude, Cursor, Codex and other AI agents.
+
+**Can AI do my Tradify invoices?**
+Yes. It turns an accepted quote into an invoice, in full or as a deposit, sends it after your OK, records payments you paste from your bank and lists what is overdue. The invoices are real Tradify invoices, so they still sync to Xero or QuickBooks the way you set it up.
+
+**Tradify has SmartWrite. What does this add?**
+SmartWrite helps you word a description. With Cotlet, the AI does the work in your account: it creates the job, the quote and the invoice, books staff on the Scheduler and records payments.
+
+**Does Tradify work with Zapier or Make?**
+Tradify has no Zapier or Make app. Through Cotlet it does: n8n, Make and Zapier can create jobs, customers and quotes in Tradify, for example from a web form, an email or a WhatsApp enquiry.
 
 **Can I use it from my phone, on site?**
 Yes, with the hosted version: once Tradify is connected, the ChatGPT and Claude apps on your phone can use it. Ask for tomorrow's schedule, a new job for a caller or the balance of a customer, without opening Tradify.
@@ -91,17 +109,11 @@ For the hosted version, no: you sign in to Tradify and add Cotlet to ChatGPT or 
 **Is my Tradify account safe?**
 Yes. Neither version sees or stores your Tradify password. You sign in yourself, the way you always do, and the AI works on that signed-in session. Anything that reaches a customer, like a sent quote or invoice, asks for your OK first: in the hosted version by default, here through your MCP client.
 
-**Can it connect Tradify to WhatsApp, Gmail or my calendar?**
-Through n8n, Make or Zapier, yes: they pass a message or an email to the Tradify tools, for example to create a job from a WhatsApp enquiry. The hosted version connects to all three. ChatGPT and Claude can also use Tradify and your other connected apps in the same chat.
-
-**Can I use it for my trade business?**
-Yes. The license lets you use it in your own business for free. You may not sell it or offer it to others as a hosted service.
+**Is it free?**
+This repo is free, also in your own trade business. The hosted version is free for 7 days with no card, then one-time credit packs from $29, no subscription. [Pricing](https://cotlet.dev/pricing?utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=faq-price).
 
 **I run Tradify for several companies or clients. Does that work?**
 Yes. Each Tradify login gets its own connection. Write to [contact@cotlet.dev](mailto:contact@cotlet.dev) and tell us how many accounts you manage.
-
-**What does the hosted version cost?**
-7 days free with no card, then one-time credit packs from $29. No subscription. [Pricing](https://cotlet.dev/pricing?utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=faq-price).
 
 ## How it works
 
@@ -457,9 +469,6 @@ The REST API answers `{"error": "<code>", "message": "..."}`. The MCP server ret
 On the hosted version a successful call uses 10 credits, failed calls are free, and the Cloud Browser uses 50 credits a day while it has an app enabled for agents. [Full pricing](https://cotlet.dev/pricing).
 
 ## FAQ
-
-**Does Tradify have an official API?**
-No. Tradify publishes no API, developer docs or webhooks (checked 11 Oct 2026). It connects to other tools through built-in integrations: QuickBooks, Xero, Sage, Stripe and Google Calendar. Details: [cotlet.dev/integrations/tradify-api-mcp-server](https://cotlet.dev/integrations/tradify-api-mcp-server).
 
 **Is there a Tradify MCP server for Claude, ChatGPT or Cursor?**
 Yes, this one runs on your machine: `tradify-mcp mcp` for Claude Code, Claude Desktop, Cursor and Codex. ChatGPT and Claude.ai connectors need a public HTTPS URL, which the [hosted Tradify MCP server](https://cotlet.dev/integrations/tradify-api-mcp-server?utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=faq-mcp) gives you.
