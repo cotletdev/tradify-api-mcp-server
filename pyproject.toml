@@ -1,9 +1,9 @@
 [project]
 name = "tradify-api-mcp"
 version = "1.0.4"
-description = "Self-hosted Tradify API and MCP server on your own Chrome session. Noncommercial use (PolyForm Noncommercial 1.0.0)."
+description = "Self-hosted Tradify API and MCP server on your own Chrome session. Use Tradify from Claude, Cursor, Codex or any MCP client."
 readme = "README.md"
-license = "PolyForm-Noncommercial-1.0.0"
+license = "Elastic-2.0"
 license-files = ["LICENSE"]
 classifiers = ["Programming Language :: Python :: 3", "Topic :: Office/Business"]
 requires-python = ">=3.11"
