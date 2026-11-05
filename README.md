@@ -1,20 +1,52 @@
-# Tradify API and MCP server, self-hosted
+# Tradify API and MCP server: connect Tradify to ChatGPT and Claude
 
 <!-- mcp-name: dev.cotlet/tradify -->
 
-A **Tradify API** and a **Tradify MCP server** you run on your own computer, in Python, on the session of your own Google Chrome. All 22 Tradify tools we run in production at [Cotlet](https://cotlet.dev/integrations/tradify-api-mcp-server): jobs, job status and notes, customers, quotes with line items, invoices from quotes, quote and invoice email, payments, the Scheduler, reports and timesheets.
+**Yes, ChatGPT and Claude can work in your Tradify account.** Ask in plain words, and the AI creates the job, writes the quote, turns it into an invoice, records the payment and books your staff. It shows you the draft first and sends nothing to a customer until you say so.
 
-Tradify has no public API, no API keys, no webhooks and no official MCP server. Its accounting connectors (Xero, QuickBooks, Sage) sync invoices and bills, not jobs, quotes or the schedule. This repo gives you:
+Tradify has no public API, no API keys and no official MCP server. This repo is the missing piece: 22 Tradify tools for AI assistants and scripts.
+
+## What you can ask
+
+> *New job for Sam Lee at 12 Oak St: replace the hot water cylinder. Book Mike for Thursday morning and email Sam the confirmation.*
+>
+> *Quote the bathroom rewire at 14 Elm Rd from my notes: 6 hours labour, 6 LED downlights at $24, one extractor fan at $85. Show me before you send it.*
+>
+> *Turn every quote accepted this week into a 30% deposit invoice.*
+>
+> *Which invoices are overdue? Total them per customer, oldest first.*
+>
+> *Record the bank transfers I paste below against their invoices.*
+>
+> *What is on tomorrow's schedule, per staff member?*
+
+## Two ways to get it
+
+| | [Ready to use, at Cotlet](https://cotlet.dev/integrations/tradify-api-mcp-server?utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=two-ways) | Run it yourself, this repo |
+|---|---|---|
+| For | trades business owners, office staff, teams | developers |
+| Setup | sign in to Tradify once, about 5 minutes, nothing to install | Python, Chrome with remote debugging, a terminal |
+| Works in | ChatGPT and Claude apps, on your phone too, plus n8n, Make, Zapier | Claude Code, Claude Desktop, Cursor, Codex on your computer |
+| Runs | 24/7, your computer can be off | while your computer and Chrome are on |
+| Price | 7 days free, no card | free |
+
+**[Start free at cotlet.dev →](https://cotlet.dev/signup?app=tradify&utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=top-button)**
+
+## Run it yourself
+
+A **Tradify API** and a **Tradify MCP server** you run on your own computer, in Python, on the session of your own Google Chrome. All 22 Tradify tools we run in production at [Cotlet](https://cotlet.dev/integrations/tradify-api-mcp-server?utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=intro): jobs, job status and notes, customers, quotes with line items, invoices from quotes, quote and invoice email, payments, the Scheduler, reports and timesheets.
+
+Tradify's accounting connectors (Xero, QuickBooks, Sage) sync invoices and bills, not jobs, quotes or the schedule. This repo gives you:
 
 - **MCP server** for Claude Code, Claude Desktop, Cursor, Codex and any MCP client, over stdio or HTTP. [Setup](#mcp-server)
 - **REST API** on `http://127.0.0.1:8787/api/v1/tradify`, with OpenAPI docs at `/docs`. [Setup](#rest-api)
 - **Python**: `call("list_invoices", {"status": "overdue"})`, plus 9 ready scripts in [`examples/`](https://github.com/cotletdev/tradify-api-mcp-server/blob/main/examples/).
 
-It is for technical people who want to run it themselves, **for noncommercial use only** ([license](#license)). If you want it running 24/7 on a server, kept working when Tradify changes its web app, for a team or a business, use the [hosted version at cotlet.dev](https://cotlet.dev/integrations/tradify-api-mcp-server).
+Free for your own use, your own trade business included ([license](#license)).
 
-[![Tradify MCP server](https://img.shields.io/badge/Tradify%20MCP-15%20tools-6d4aef)](#all-15-tools)
+[![Tradify MCP server](https://img.shields.io/badge/Tradify%20MCP-22%20tools-6d4aef)](#all-22-tools)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-141318)](#requirements)
-[![License: PolyForm Noncommercial 1.0.0](https://img.shields.io/badge/license-PolyForm%20Noncommercial-141318)](https://github.com/cotletdev/tradify-api-mcp-server/blob/main/LICENSE)
+[![License: Elastic 2.0](https://img.shields.io/badge/license-Elastic%202.0-141318)](https://github.com/cotletdev/tradify-api-mcp-server/blob/main/LICENSE)
 [![MCP Badge](https://lobehub.com/badge/mcp/cotletdev-tradify-api-mcp-server)](https://lobehub.com/mcp/cotletdev-tradify-api-mcp-server)
 
 ```bash
@@ -26,6 +58,7 @@ claude mcp add tradify -- uvx tradify-api-mcp mcp
 
 ## Contents
 
+- [Questions from Tradify users](#questions-from-tradify-users)
 - [How it works](#how-it-works)
 - [Requirements](#requirements)
 - [Install](#install)
@@ -40,6 +73,35 @@ claude mcp add tradify -- uvx tradify-api-mcp mcp
 - [Self-hosted or hosted](#self-hosted-or-hosted)
 - [FAQ](#faq)
 - [License](#license)
+
+## Questions from Tradify users
+
+**How do I connect Tradify to ChatGPT?**
+Sign up at [cotlet.dev](https://cotlet.dev/signup?app=tradify&utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=faq-chatgpt), sign in to Tradify once in your Cloud Browser there, and add Cotlet to ChatGPT, following the steps in your account. Then ask ChatGPT about your jobs, quotes and invoices like you would ask your office manager. ChatGPT needs a server on the internet, so this repo alone, running on your computer, does not connect to ChatGPT.
+
+**Can Claude create quotes and invoices in Tradify for me?**
+Yes. It writes a draft quote with labour and materials lines, shows it to you, and sends it only after your OK. An accepted quote becomes an invoice, in full or as a deposit. It works in the Claude app through Cotlet, or in Claude Code and Claude Desktop with this repo.
+
+**Can I use it from my phone, on site?**
+Yes, with the hosted version: once Tradify is connected, the ChatGPT and Claude apps on your phone can use it. Ask for tomorrow's schedule, a new job for a caller or the balance of a customer, without opening Tradify.
+
+**Do I need to be technical?**
+For the hosted version, no: you sign in to Tradify and add Cotlet to ChatGPT or Claude, with step-by-step instructions in your account. This repo is for people who are fine with Python and a terminal.
+
+**Is my Tradify account safe?**
+You sign in to Tradify yourself, and the AI works on that signed-in session. Neither version stores your Tradify password. Anything that reaches a customer, like a sent quote or invoice, asks for your OK first: in the hosted version by default, here through your MCP client.
+
+**Can it connect Tradify to WhatsApp, Gmail or my calendar?**
+Through n8n, Make or Zapier, yes: they pass a message or an email to the Tradify tools, for example to create a job from a WhatsApp enquiry. The hosted version connects to all three. ChatGPT and Claude can also use Tradify and your other connected apps in the same chat.
+
+**Can I use it for my trade business?**
+Yes. The license lets you use it in your own business for free. You may not sell it or offer it to others as a hosted service.
+
+**I run Tradify for several companies or clients. Does that work?**
+Yes. Each Tradify login gets its own connection. Write to [contact@cotlet.dev](mailto:contact@cotlet.dev) and tell us how many accounts you manage.
+
+**What does the hosted version cost?**
+7 days free with no card, then one-time credit packs from $29. No subscription. [Pricing](https://cotlet.dev/pricing?utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=faq-price).
 
 ## How it works
 
@@ -381,15 +443,15 @@ The REST API answers `{"error": "<code>", "message": "..."}`. The MCP server ret
 
 ## Self-hosted or hosted
 
-| | This repo | [Cotlet, hosted](https://cotlet.dev/integrations/tradify-api-mcp-server) |
+| | This repo | [Cotlet, hosted](https://cotlet.dev/integrations/tradify-api-mcp-server?utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=compare) |
 |---|---|---|
-| Tools | the same 15 | the same 15 |
+| Tools | the same 22 | the same 22 |
 | Runs | on your computer, while it is on | in the cloud, 24/7 |
 | Tradify session | your Chrome, saved in a local file | your own Cloud Browser in the EU, profile encrypted with AES-256-GCM |
 | When Tradify changes its web app | `git pull` once we have fixed it | fixed for you, every tool tested daily |
 | Approvals | your MCP client asks per call | quote and invoice email and Scheduler bookings wait for your OK, switchable per tool |
 | Works with | MCP clients on your machine, local scripts | Claude.ai and ChatGPT connectors, n8n, Make, Zapier, any HTTP client |
-| Who may use it | you, for noncommercial use | teams, businesses, agencies |
+| Who may use it | you and your own business | you, teams, businesses, agencies |
 | Price | free | free 7-day trial with 2,000 credits, no card; then one-time packs from $29 for 5,000 credits |
 
 On the hosted version a successful call uses 10 credits, failed calls are free, and the Cloud Browser uses 50 credits a day while it has an app enabled for agents. [Full pricing](https://cotlet.dev/pricing).
@@ -400,7 +462,7 @@ On the hosted version a successful call uses 10 credits, failed calls are free, 
 No. Tradify publishes no API, developer docs or webhooks (checked 11 Oct 2026). It connects to other tools through built-in integrations: QuickBooks, Xero, Sage, Stripe and Google Calendar. Details: [cotlet.dev/integrations/tradify-api-mcp-server](https://cotlet.dev/integrations/tradify-api-mcp-server).
 
 **Is there a Tradify MCP server for Claude, ChatGPT or Cursor?**
-Yes, this one runs on your machine: `tradify-mcp mcp` for Claude Code, Claude Desktop, Cursor and Codex. ChatGPT and Claude.ai connectors need a public HTTPS URL, which the [hosted Tradify MCP server](https://cotlet.dev/integrations/tradify-api-mcp-server) gives you.
+Yes, this one runs on your machine: `tradify-mcp mcp` for Claude Code, Claude Desktop, Cursor and Codex. ChatGPT and Claude.ai connectors need a public HTTPS URL, which the [hosted Tradify MCP server](https://cotlet.dev/integrations/tradify-api-mcp-server?utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=faq-mcp) gives you.
 
 **Can it get my Tradify jobs and invoices into another tool?**
 Yes. `python examples/export_jobs.py --status all --out jobs.csv` and `python examples/overdue_invoices.py --out overdue.csv` write CSV, and the REST API serves the same lists as JSON to n8n or any HTTP client.
@@ -426,21 +488,18 @@ Technically yes, with a pasted cookie or a `session.json` copied from your compu
 **Will my Tradify account get banned?**
 Requests carry Chrome's fingerprint and go out one at a time, as you would click. Nobody can promise a platform never acts. Keep to your normal use.
 
-**Can I use it for my trade business or for my clients?**
-No. The license allows noncommercial use only, and running your own business counts as business use. For a trade business, a team or client work, use [Cotlet](https://cotlet.dev) or write to [contact@cotlet.dev](mailto:contact@cotlet.dev).
-
-**Can I use the code for anything I like?**
-No. The source is public, but the license allows noncommercial use only: no business use.
+**Can I change the code or offer it to my clients?**
+You may change it and use it in your own business. You may not offer it to others as a hosted or managed service. For client work, use [Cotlet](https://cotlet.dev?utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=faq-clients) or write to [contact@cotlet.dev](mailto:contact@cotlet.dev).
 
 **A tool broke or I need another one.**
 [Open an issue](https://github.com/cotletdev/tradify-api-mcp-server/issues) with the tool name and the error message.
 
 ## License
 
-[PolyForm Noncommercial License 1.0.0](https://github.com/cotletdev/tradify-api-mcp-server/blob/main/LICENSE). In short:
+[Elastic License 2.0](https://github.com/cotletdev/tradify-api-mcp-server/blob/main/LICENSE). In short:
 
-- **Allowed:** noncommercial use: you, for your own personal purposes with your own Tradify account, or a charity, school, public research or government body. Changing the code, and sharing it under the same license.
-- **Not allowed:** any commercial use, your own business included; client work; selling or offering it, or a service built on it.
+- **Allowed:** using it for yourself and in your own business, free. Changing the code and sharing it under the same license.
+- **Not allowed:** offering it to others as a hosted or managed service, removing the license notices, getting around its limits.
 
 ---
 
@@ -453,4 +512,4 @@ No. The source is public, but the license allows noncommercial use only: no busi
   </a>
 </p>
 
-Maintained by [Cotlet](https://cotlet.dev) ([@cotletdev](https://x.com/cotletdev)). Tradify is a trademark of its owner. This project is unofficial and not affiliated with, endorsed or sponsored by Tradify.
+Maintained by [Cotlet](https://cotlet.dev?utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=footer) ([@cotletdev](https://x.com/cotletdev)). Tradify is a trademark of its owner. This project is unofficial and not affiliated with, endorsed or sponsored by Tradify.
