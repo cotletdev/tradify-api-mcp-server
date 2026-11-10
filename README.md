@@ -51,6 +51,8 @@ Free for your own use, your own trade business included ([license](#license)).
 [![License: Elastic 2.0](https://img.shields.io/badge/license-Elastic%202.0-141318)](https://github.com/cotletdev/tradify-api-mcp-server/blob/main/LICENSE)
 [![MCP Badge](https://lobehub.com/badge/mcp/cotletdev-tradify-api-mcp-server)](https://lobehub.com/mcp/cotletdev-tradify-api-mcp-server)
 
+Also on Odel: https://odel.app/modules/cotlet/tradify
+
 ```bash
 uv tool install tradify-api-mcp                  # or: pip install tradify-api-mcp
 tradify-mcp connect                                # reads your Tradify session from Chrome
