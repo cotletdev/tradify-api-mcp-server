@@ -1,4 +1,4 @@
-# Tradify API and MCP server: connect Tradify to ChatGPT and Claude
+# Tradify API integration and MCP server: connect Tradify to ChatGPT and Claude
 
 <!-- mcp-name: dev.cotlet/tradify -->
 
@@ -26,13 +26,68 @@ Tradify has no public API, no API keys and no official MCP server. As of Novembe
 |---|---|---|
 | For | trades business owners, office staff, teams | developers |
 | Setup | sign in to Tradify once, about 5 minutes, nothing to install | Python, Chrome with remote debugging, a terminal |
-| Works in | ChatGPT and Claude apps, on your phone too, Cursor, Codex, OpenClaw, any MCP client, n8n, Make, Zapier, REST API | Claude Code, Claude Desktop, Cursor, Codex on your computer |
+| Works in | ChatGPT and Claude apps, on your phone too, Cursor, Codex, OpenClaw, any MCP client, n8n, Make, Zapier, your own API endpoints (Custom API) | Claude Code, Claude Desktop, Cursor, Codex on your computer |
 | Runs | 24/7, your computer can be off | while your computer and Chrome are on |
 | Price | 7 days free, no card | free |
 
 Cotlet is best for trades business owners who want ChatGPT, Claude or another AI agent to work in Tradify for them, with nothing to install.
 
 **[Start free at cotlet.dev →](https://cotlet.dev/signup?app=tradify&utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=top-button)**
+
+## What trades business owners ask their AI to do in Tradify
+
+| Job | Ask your AI | Make it repeat |
+|---|---|---|
+| Quotes from notes or emails | "Quote the bathroom rewire at 14 Elm Rd from my notes: 6 hours labour, 6 LED downlights at $24. Show me before you save it." | When a quote request arrives |
+| Enquiries into jobs | "Read today's new enquiries, pull out name, address and the work, and fill in the enquiry fields." | Every morning |
+| Unanswered quotes | "List quotes sent more than 7 days ago with no answer and draft a polite text for each. Send nothing yet." | Weekly |
+| Overdue invoices | "Which invoices are overdue? Total them per customer, oldest first, and draft a reminder for each." | Weekly |
+| Deposit invoices | "Turn every quote accepted this week into a 30% deposit invoice." | Weekly |
+| Xero, MYOB or QuickBooks checks | "List this month's Tradify invoices and bills that are missing in Xero, and show any duplicates." | Before month end |
+| Supplier bills into jobs | "Add the costs from these supplier invoices to the right jobs as bills. Show me before you save." | When bills arrive |
+| Price lists from CSV | "Import my wholesaler's price list from this CSV into my Tradify price list." | When prices change |
+| Exports | "Export all jobs, quotes and invoices from this year to a spreadsheet." | Monthly |
+| Job profit | "Which jobs this month lost money? Show labour, materials and invoiced amount per job." | Monthly |
+| Schedule | "What is on tomorrow's schedule per staff member? Flag any double bookings." | Every evening |
+| Timesheets for payroll | "Download last week's timesheets and total the hours per staff member for payroll." | Every Monday |
+| Several jobs on one invoice | "Put this customer's three finished jobs on one invoice and show it to me before you save." | When jobs finish |
+
+Your AI asks you before it sends, books or changes anything, and quote and invoice email waits for your OK. Payments stay in your hands: Cotlet refuses payments.
+
+## Your own Tradify API, built with Cotlet (hosted)
+
+Tradify gives you no public API and no API keys. With Cotlet you build your own: your AI does the job once in your Cloud Browser, you save it as an endpoint, and you call it from Google Sheets, n8n, Make, Zapier, GoHighLevel, HubSpot, your own code.
+
+Examples you can build in a few minutes (none of them exists until you build it):
+
+| Endpoint you build | What it returns or does |
+|---|---|
+| `overdue-invoices` | customer, invoice number, amount due and days overdue |
+| `unanswered-quotes` | quotes sent with no answer, with customer, value and date sent |
+| `new-enquiries` | enquiries since a date, with name, address and the work asked for |
+| `staff-schedule` | jobs per staff member for a date |
+| `job-profit` | labour, materials, invoiced amount and margin per job |
+| `timesheets` | hours per staff member between two dates |
+| `jobs-export` | jobs with status, customer and value for a period |
+| `invoices-export` | invoices with number, customer, total and status for a period |
+| `add-enquiry` | adds an enquiry with name, phone, address and the work, from a form or an ad lead (writes only after you allow it) |
+| `add-bill` | adds a supplier bill to a job (writes only after you allow it) |
+| `draft-quote` | saves a draft quote from the lines you send (writes only after you allow it) |
+
+Call it with your Cotlet API key, JSON in and JSON out:
+
+```bash
+curl -X POST https://cotlet.dev/api/v1/custom/overdue-invoices \
+  -H "Authorization: Bearer $COTLET_API_KEY" -H "Content-Type: application/json" -d '{}'
+```
+
+Limits: one call runs up to 90 seconds, writes wait for your consent, payments are blocked. Start here: https://cotlet.dev/app/custom-api/new?app=tradify
+
+## Find it on Cotlet.dev
+
+- [Tradify MCP server on Cotlet.dev](https://cotlet.dev/integrations/tradify-api-mcp-server?utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=old-repo)
+- [Tradify API with Cotlet](https://cotlet.dev/integrations/api/tradify?utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=old-repo)
+- [Does Tradify have an API or MCP server?](https://cotlet.dev/api-status/tradify?utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=old-repo)
 
 ## Run it yourself
 
@@ -41,7 +96,7 @@ A **Tradify API** and a **Tradify MCP server** you run on your own computer, in 
 Tradify's accounting connectors (Xero, QuickBooks, Sage) sync invoices and bills, not jobs, quotes or the schedule. This repo gives you:
 
 - **MCP server** for Claude Code, Claude Desktop, Cursor, Codex and any MCP client, over stdio or HTTP. [Setup](#mcp-server)
-- **REST API** on `http://127.0.0.1:8787/api/v1/tradify`, with OpenAPI docs at `/docs`. [Setup](#rest-api)
+- **REST API** on `http://127.0.0.1:8787/api/v1/tradify`, with OpenAPI docs at `/docs`. [Setup](#rest-api-local-this-repo)
 - **Python**: `call("list_invoices", {"status": "overdue"})`, plus 9 ready scripts in [`examples/`](https://github.com/cotletdev/tradify-api-mcp-server/blob/main/examples/).
 
 Free for your own use, your own trade business included ([license](#license)).
@@ -68,7 +123,7 @@ claude mcp add tradify -- uvx tradify-api-mcp mcp
 - [Install](#install)
 - [Connect your Chrome](#connect-your-chrome)
 - [MCP server](#mcp-server)
-- [REST API](#rest-api)
+- [REST API](#rest-api-local-this-repo)
 - [Python and the example scripts](#python-and-the-example-scripts)
 - [All 22 tools](#all-22-tools)
 - [Configuration](#configuration)
@@ -79,6 +134,54 @@ claude mcp add tradify -- uvx tradify-api-mcp mcp
 - [License](#license)
 
 ## Questions from Tradify users
+
+**Is there a ChatGPT or Claude connector for Tradify?**
+
+Not from Tradify. Its own AI tools, SmartRead and SmartWrite, work inside Tradify. With Cotlet, ChatGPT and Claude work in your own Tradify account, in their phone apps too.
+
+**How do I connect Tradify to Zapier or Make without an API key?**
+
+Tradify has no Zapier app and gives no API keys. With Cotlet you build your own Tradify endpoints, such as `new-enquiries` or `add-enquiry`, and call them from Zapier, Make or n8n.
+
+**How do I get new Tradify jobs and customers into Google Sheets every week?**
+
+Build a `jobs-export` endpoint once, then call it from Google Sheets or n8n on a schedule. Or ask your AI to download the export as a spreadsheet each week.
+
+**How do I connect Tradify to GoHighLevel, HubSpot or Mailchimp?**
+
+Call your own `add-enquiry` endpoint from a GoHighLevel or HubSpot workflow, so ad leads become Tradify enquiries. In the other direction, a `jobs-export` or customer list endpoint feeds HubSpot or Mailchimp.
+
+**Why are my Tradify invoices missing in Xero or MYOB?**
+
+Cotlet does not change how the Tradify and Xero or MYOB sync works. Your AI can list the invoices and bills that are missing on the accounting side, and any duplicates, so you fix them in minutes.
+
+**Can Claude draft a quote from a customer's email and put it into Tradify?**
+
+Yes. Paste the email or forward its text, and your AI saves a draft quote with labour and material lines. You check it and send it from Tradify.
+
+**Can ChatGPT chase my unanswered quotes?**
+
+Yes. Your AI lists the quotes with no answer and drafts a text for each, and sends nothing until you say yes. Tradify's own quote reminders still work alongside.
+
+**Can AI tell me which of my Tradify jobs lost money?**
+
+Yes. It reads labour, materials and invoiced amounts per job and shows the jobs with the lowest margin, so you see where the money went.
+
+**How do I import my wholesaler's price list into Tradify?**
+
+Give your AI the CSV from your wholesaler. It imports the items into your Tradify price list and shows you what changed.
+
+**Can I sync my Tradify schedule with Google Calendar both ways?**
+
+Tradify's own calendar sync runs one way. Cotlet does not run a live two-way sync; your AI can send each day's jobs per staff member to a shared calendar, a sheet or a message.
+
+**How do I export all my Tradify data before I switch?**
+
+Tradify's help center explains exporting your data. Your AI can also download every export your login can make: jobs, quotes, invoices, customers and timesheets.
+
+**Is Cotlet affiliated with Tradify?**
+
+No. Cotlet is independent and not affiliated with Tradify.
 
 **Does Tradify have an API?**
 Not a public one. Tradify offers no public API, no self-service API keys and no webhooks, only its built-in integrations (Xero, QuickBooks, MYOB, Sage, Stripe, Google Calendar). This repo and [Cotlet](https://cotlet.dev/integrations/tradify-api-mcp-server?utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=faq-api) give you the missing Tradify API: 22 tools for jobs, customers, quotes, invoices, payments, the Scheduler, reports and timesheets, as a REST API and an MCP server.
@@ -287,7 +390,7 @@ Then ask your agent things like:
 >
 > *Record the bank transfers I paste below against their invoices, then list every invoice still overdue, totalled per customer, oldest first.*
 
-## REST API
+## REST API (local, this repo)
 
 ```bash
 tradify-mcp serve                   # http://127.0.0.1:8787, MCP at /mcp, docs at /docs
@@ -467,7 +570,7 @@ The REST API answers `{"error": "<code>", "message": "..."}`. The MCP server ret
 | Tradify session | your Chrome, saved in a local file | your own Cloud Browser in the EU, profile encrypted with AES-256-GCM |
 | When Tradify changes its web app | `git pull` once we have fixed it | fixed for you, every tool tested daily |
 | Approvals | your MCP client asks per call | quote and invoice email and Scheduler bookings wait for your OK, switchable per tool |
-| Works with | MCP clients on your machine, local scripts | Claude.ai and ChatGPT connectors, n8n, Make, Zapier, any HTTP client |
+| Works with | MCP clients on your machine, local scripts | Claude.ai and ChatGPT connectors, n8n, Make, Zapier, any HTTP client through your own endpoints (Custom API) |
 | Who may use it | you and your own business | you, teams, businesses, agencies |
 | Price | free | free 7-day trial with 2,000 credits, no card; then one-time packs from $29 for 5,000 credits |
 
