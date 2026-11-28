@@ -89,6 +89,178 @@ Limits: one call runs up to 90 seconds, writes wait for your consent, payments a
 - [Tradify API with Cotlet](https://cotlet.dev/integrations/api/tradify?utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=old-repo)
 - [Does Tradify have an API or MCP server?](https://cotlet.dev/api-status/tradify?utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=old-repo)
 
+## What you can ask your AI to do in Tradify
+
+These are real jobs Tradify users asked about. Cotlet lets ChatGPT, Claude or any MCP client do them in your own signed-in Tradify account.
+
+### Quotes and enquiries
+
+#### Can Claude draft a quote from a customer's email and put it into Tradify for me to send?
+
+Yes. With Cotlet, Claude or ChatGPT reads the customer's email, finds the items in your Tradify price list and builds a draft quote in your signed-in Tradify account. Nothing is sent until you say yes.
+
+Ask your agent: "Read this customer email and build a draft quote in Tradify with the right items from my price list. Do not send it."
+
+#### Can an AI read my new Tradify enquiries, pull out name, address and what they want, and fill in the enquiry fields?
+
+Yes. With Cotlet, your agent opens each new enquiry in Tradify, reads the message and fills in the customer name, site address and job description. Nothing changes until you say yes.
+
+Ask your agent: "Go through today's new Tradify enquiries and fill in name, site address and job description from each message. Show me before saving."
+
+As an API endpoint: Yes. Save the enquiry check as an endpoint in Cotlet and call it every hour from n8n, Make or a script.
+
+#### Can ChatGPT chase my unanswered quotes in Tradify with a polite text each week?
+
+Yes. With Cotlet, ChatGPT or Claude lists the Tradify quotes still waiting for an answer and drafts a short follow-up for each customer. Nothing is sent until you say yes.
+
+Ask your agent: "List Tradify quotes sent more than 7 days ago with no answer and draft a polite follow-up for each customer."
+
+As an API endpoint: Yes. Save the open-quote list as an endpoint in Cotlet and call it every Monday from n8n, Make or Zapier to send the texts.
+
+#### How do I connect Tradify to GoHighLevel so enquiries from my ads become Tradify enquiries?
+
+Yes. Tradify has no Zapier app or API. With Cotlet, your agent reads new leads in GoHighLevel and creates each one as an enquiry in Tradify, both signed in in your Cloud Browser. Nothing is created until you say yes.
+
+Ask your agent: "Take today's new GoHighLevel leads and create a Tradify enquiry for each with name, phone, address and what they asked for."
+
+As an API endpoint: Yes. Save the lead-to-enquiry step as an endpoint in Cotlet and call it from n8n or Make whenever GoHighLevel gets a new lead.
+
+### Xero, MYOB and invoices
+
+#### Tradify keeps doubling up invoices and payments in Xero. How do I find and fix the duplicates?
+
+Yes. With Cotlet, your agent compares this month's Tradify invoices with the ones in Xero, both signed in in your Cloud Browser, and lists the doubles with numbers and amounts. Nothing changes in Xero until you say yes.
+
+Ask your agent: "Compare this month's Tradify invoices and payments with Xero and list every duplicate with number, customer and amount."
+
+As an API endpoint: Yes. Save the comparison as an endpoint in Cotlet and call it weekly from n8n, Make or Zapier to catch new doubles early.
+
+#### Why are my Tradify invoices not showing up in MYOB, and how do I make them sync again?
+
+Partly. Cotlet cannot repair Tradify's MYOB connection. With Cotlet, your agent lists the Tradify invoices missing in MYOB and can enter them in MYOB one by one, both signed in in your Cloud Browser. Nothing is entered until you say yes.
+
+Ask your agent: "List Tradify invoices from the last 30 days that are not in MYOB, with number, customer and total."
+
+As an API endpoint: Yes. Save the missing-invoice check as an endpoint in Cotlet and call it every week from n8n or Make.
+
+#### How do I combine several Tradify jobs into one invoice and control when payment reminders go out?
+
+Partly. With Cotlet, your agent gathers one customer's finished Tradify jobs with their totals and builds the invoice the way Tradify's screens allow. For reminders, it lists unpaid invoices and drafts each reminder, so nothing goes out until you say yes.
+
+Ask your agent: "List this customer's finished Tradify jobs with totals, then list their unpaid invoices and draft one reminder for each."
+
+#### How do I send a customer a job report with photos from Tradify, and attach it to the invoice?
+
+Yes. With Cotlet, your agent collects the job notes and photos in Tradify, writes a short job report and attaches it to the job's invoice. Nothing is sent to the customer until you say yes.
+
+Ask your agent: "Write a job report for this Tradify job with its notes and photos and attach it to the invoice. Do not send yet."
+
+#### How do I stop Tradify sending every contact at a customer's business the invoices and service reports, and add separate accounts and site contacts?
+
+Partly. Tradify decides who gets invoices from each customer's contact settings. With Cotlet, your agent goes through a customer's contacts and sets who receives invoices and who is only a site contact, as far as Tradify's screens allow. Nothing changes until you say yes.
+
+Ask your agent: "Open this customer's contacts in Tradify and set only the accounts person to receive invoices. Show me the changes first."
+
+### Job costs and profit
+
+#### Can AI tell me which of my Tradify jobs lost money and why?
+
+Yes. With Cotlet, ChatGPT or Claude reads the costs, labour and invoiced totals of your finished Tradify jobs and lists the ones that lost money, with the line that caused it, such as extra hours or materials not charged.
+
+Ask your agent: "List my Tradify jobs finished last month that made a loss and say for each what pushed the cost over the invoice."
+
+As an API endpoint: Yes. Save the job profit list as an endpoint in Cotlet and call it from n8n, Make or a script at each month's end.
+
+#### How do I get an itemised profit report per job out of Tradify that I can print or export?
+
+Yes. With Cotlet, your agent reads each job's quoted, costed and invoiced lines in Tradify and gives you one table per job as a CSV or a printable sheet.
+
+Ask your agent: "Build an itemised profit table for each Tradify job finished this month with costs, labour, invoiced total and margin."
+
+As an API endpoint: Yes. Save the report as an endpoint in Cotlet that returns JSON per job, and send it to Google Sheets from n8n or Make.
+
+#### Can ChatGPT read my supplier invoices and add the costs to the right Tradify job?
+
+Yes. With Cotlet, your agent reads each supplier invoice, matches it to the Tradify job by job number or site address and adds the costs to that job. Nothing is added until you say yes.
+
+Ask your agent: "Read these supplier invoices, match each to its Tradify job and add the costs. Show me the matches first."
+
+#### How do I import my wholesaler's price list into Tradify? Mine won't send me a CSV.
+
+Yes. With Cotlet, your agent reads the prices from your wholesaler's trade website or PDF and adds or updates the items in your Tradify price list. Nothing changes until you say yes.
+
+Ask your agent: "Read the prices from my wholesaler's trade account and update the matching items in my Tradify price list. Show me the changes first."
+
+### Crew, schedule and timesheets
+
+#### Can Claude schedule my crew in Tradify and warn me about double bookings?
+
+Yes. With Cotlet, Claude or ChatGPT reads your Tradify schedule, lists clashes and gaps for each worker and proposes where to put the new jobs. Nothing is booked until you say yes.
+
+Ask your agent: "Check next week's Tradify schedule, list any double bookings per worker and propose slots for the unscheduled jobs."
+
+As an API endpoint: Yes. Save the clash check as an endpoint in Cotlet and call it every evening from n8n, Make or Zapier.
+
+#### Can an AI log Tradify jobs from my emails, check on my crew's times and keep me updated?
+
+Yes. With Cotlet, your agent turns job requests from your inbox into Tradify jobs, reads the crew's timesheets and sends you a short daily update in the chat. Nothing is created until you say yes.
+
+Ask your agent: "Create Tradify jobs from today's job emails, then tell me who on my crew has logged time today and on which job."
+
+As an API endpoint: Yes. Save the daily update as an endpoint in Cotlet and call it every afternoon from n8n or Make.
+
+#### How do I send Tradify timesheets to my payroll system every Monday without exporting files by hand?
+
+Yes. With Cotlet, your agent reads last week's timesheets in Tradify and enters the hours in your payroll system, signed in in the same Cloud Browser. Nothing is submitted until you say yes.
+
+Ask your agent: "Read last week's Tradify timesheets and fill the hours into my payroll system for each worker. Stop before submitting."
+
+As an API endpoint: Yes. Save the timesheet read as an endpoint in Cotlet and call it every Monday from n8n, Make or Zapier.
+
+#### How do I sync my Tradify schedule both ways with Google Calendar so my wife sees my week?
+
+Partly. Tradify brings Google Calendar into Tradify one way only. With Cotlet, your agent copies your Tradify week into Google Calendar, signed in in the same Cloud Browser. Nothing is added until you say yes.
+
+Ask your agent: "Copy my Tradify schedule for next week into my Google Calendar, one event per job with site address."
+
+As an API endpoint: Yes. Save the week read as an endpoint in Cotlet and call it daily from n8n or Make to update Google Calendar.
+
+### Exports, imports and other tools
+
+#### How do I export all my Tradify jobs, quotes and customers to Excel before I switch?
+
+Yes. With Cotlet, your agent goes through your signed-in Tradify account and saves jobs, quotes and customers as spreadsheets you keep.
+
+Ask your agent: "Export all my Tradify customers, jobs and quotes into three CSV files I can open in Excel."
+
+#### How do I get new Tradify jobs and customers into Google Sheets automatically every week?
+
+Yes. Tradify has no Zapier or n8n app. With Cotlet, your agent reads the week's new Tradify jobs and customers and adds them as rows to your Google Sheet. Nothing is added until you say yes.
+
+Ask your agent: "Add this week's new Tradify jobs and customers to my Google Sheet, one row each."
+
+As an API endpoint: Yes. Save the weekly read as an endpoint in Cotlet and call it every Friday from n8n, Make or Zapier to fill the sheet.
+
+#### How do I connect Tradify to Mailchimp or HubSpot so new customers get added without retyping?
+
+Yes. With Cotlet, your agent reads new customers in Tradify and adds them to Mailchimp or HubSpot, both signed in in your Cloud Browser. Nothing is added until you say yes.
+
+Ask your agent: "Add every Tradify customer created this month to my Mailchimp audience with name and email."
+
+As an API endpoint: Yes. Save the new-customer read as an endpoint in Cotlet and call it daily from n8n or Make to push them to Mailchimp or HubSpot.
+
+#### How do I bring my old customers and jobs into Tradify from my previous system?
+
+Yes. With Cotlet, your agent reads your old system or its export and adds the customers and jobs in Tradify one by one. Nothing is created until you say yes to the first batch.
+
+Ask your agent: "Take the customers in this spreadsheet and add each to Tradify with address and contact details. Show me the first five first."
+
+#### How do I move my Tradify job history into ServiceM8?
+
+Partly. With Cotlet, your agent reads your job history in Tradify and adds it to ServiceM8, both signed in in your Cloud Browser. ServiceM8's own import may suit large volumes better, and nothing is created until you say yes.
+
+Ask your agent: "Read my Tradify jobs from this year and add them to ServiceM8 with customer, address and total. Show me the first five first."
+
 ## Run it yourself
 
 A **Tradify API** and a **Tradify MCP server** you run on your own computer, in Python, on the session of your own Google Chrome. All 22 Tradify tools we run in production at [Cotlet](https://cotlet.dev/integrations/tradify-api-mcp-server?utm_source=github&utm_medium=readme&utm_campaign=tradify&utm_content=intro): jobs, job status and notes, customers, quotes with line items, invoices from quotes, quote and invoice email, payments, the Scheduler, reports and timesheets.
